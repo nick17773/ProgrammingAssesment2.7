@@ -1,10 +1,14 @@
+import json
+
+
+# this function declares the selection for the mode of the cipher, either encryption, decryption or end
 def EncryptOrDecrypt():
     count = 0
-    encrypt = ["Encrypt", "encrypt", "E", "e"]
-    decrypt = ["Decrypt", "decrypt", "D", "d"]
-    end = ["End", "end", "X", "x"]
+    encrypt = ["Encrypt", "encrypt", "E", "e"]  # list of possible inputs that will be taken to use as encrypt
+    decrypt = ["Decrypt", "decrypt", "D", "d"]  # list of possible inputs that will be taken to use as decrypt
+    end = ["End", "end", "X", "x"]  # list of possible inputs that will be taken to end the program
     while count == 0:
-        mode = str(input("Encrypt or Decrypt? "))
+        mode = str(input("Encrypt or Decrypt? "))  # input that asks the user whether they will encrypt or decrypt
         if mode in encrypt:
             count = count + 1
         elif mode in decrypt:
@@ -19,21 +23,22 @@ def EncryptOrDecrypt():
 history = []
 
 
+# cipher function
 def cipher(history):
     letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     translated_message = ''
-    encrypt = ["Encrypt", "encrypt", "E", "e"]
-    decrypt = ["Decrypt", "decrypt", "D", "d"]
-    end = ["End", "end", "X", "x"]
+    encrypt = ["Encrypt", "encrypt", "E", "e"]  # same as above list for encrypt
+    decrypt = ["Decrypt", "decrypt", "D", "d"]  # same as above list for decrypt
+    end = ["End", "end", "X", "x"]  # same as above list for end
     index = 0
     yeet = True
-    while yeet:
+    while yeet:  # while loop that keeps the cipher running until the user chooses to end.
         message = input("Enter message text: ")
 
         key = input("Set shift offset ")
         mode = EncryptOrDecrypt()
-        for character in message:
+        for character in message:  # encryption/decryption method
             if character in letters:
                 number = letters.find(character)
                 if mode in encrypt:
@@ -56,28 +61,30 @@ def cipher(history):
 
             else:
                 translated_message = translated_message + character
-        history.append(translated_message)
+        history.append(translated_message)  # appends the translated message to history to be used later
         return translated_message
 
 
-yes = ["Yes", "yes", "y", "Y"]
-no = ["No", "no", "n", "N"]
-yeet = True
-while yeet:
-    start = input("Do you want to use the cipher? ")
-    if start in yes:
-        print(cipher(history))
-    elif start == "history":
-
-        for item in history:
+yes = ["Yes", "yes", "y", "Y"]  # list for possible clauses to be used to continue the loop relating to yes
+no = ["No", "no", "n", "N"]  # list for possible clauses to be used to end the loop relating to no
+yeet = True  # variable that keeps the loop running
+while yeet:  # loop that continues the cipher until the user opts out.
+    start = input("Do you want to use the cipher? ")  # input that asks the user if they want to use the cipher
+    if start in yes:  # if statement that allows the user to run the cipher
+        print(cipher(history))  # print statement that runs the cipher function
+    elif start == "history":  # elif statment that allows the user to view the history of their translated inputs
+        for item in history:  # for loop that prints everything in the history list
             print(item)
-    elif start in no:
-        print("Thank you for using this tool, Goodbye")
+    elif start in no:  # elif statment that allows the user to end the loop for the cipher
+        print(
+            "Thank you for using this tool, Goodbye")  # print statment that that runs a message when the user ends the loop
 
         yeet = False
-    else:
+    else:  # else statment that runs when the user doesn't input the correct value
         print("please enter either Yes, No, or History to continue")
 
-with open('cipherHistory.txt', 'w') as filehandle:
+# open output file for writing
+with open('cipherHistory.txt',
+          'w') as filehandle:  # with statement that outputs the history to a text file, which is overwritten everytime the loop is run
     for listitem in history:
-        filehandle.write('%s\n' % listitem)
+        json.dump(history, filehandle)
