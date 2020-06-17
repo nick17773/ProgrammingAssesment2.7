@@ -55,16 +55,18 @@ def cipher(history):
         return translated_message
 
 
+yes = ["Yes", "yes", "y", "Y"]
+no = ["No", "no", "n", "N"]
 yeet = True
 while yeet:
     start = input("Do you want to use the cipher? ")
-    if start == "yes":
+    if start in yes:
         print(cipher(history))
     elif start == "history":
 
         for item in history:
             print(item)
-    elif start == "no" or start == "No":
+    elif start in no:
         print("Thank you for using this tool, Goodbye")
 
         yeet = False
