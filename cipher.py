@@ -1,12 +1,15 @@
 def EncryptOrDecrypt():
     count = 0
+    encrypt = ["Encrypt", "encrypt", "E", "e"]
+    decrypt = ["Decrypt", "decrypt", "D", "d"]
+    end = ["End", "end", "X", "x"]
     while count == 0:
         mode = str(input("Encrypt or Decrypt? "))
-        if mode == "encrypt" or mode == "Encrypt" or mode == "E" or mode == "e":
+        if mode in encrypt:
             count = count + 1
-        elif mode == "decrypt" or mode == "Decrypt" or mode == "D" or mode == "d":
+        elif mode in decrypt:
             count = count + 1
-        elif mode == "end" or mode == "End" or mode == "X" or mode == "x":
+        elif mode in end:
             break
         else:
             print("You need to enter in a valid answer. Please try again. ")
@@ -20,7 +23,9 @@ def cipher(history):
     letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     translated_message = ''
-
+    encrypt = ["Encrypt", "encrypt", "E", "e"]
+    decrypt = ["Decrypt", "decrypt", "D", "d"]
+    end = ["End", "end", "X", "x"]
     index = 0
     yeet = True
     while yeet:
@@ -31,11 +36,11 @@ def cipher(history):
         for character in message:
             if character in letters:
                 number = letters.find(character)
-                if mode == "encrypt" or mode == "Encrypt" or mode == "E" or mode == "e":
+                if mode in encrypt:
                     number = number + (ord(key[index]) - ord('a'))
-                elif mode == "decrypt" or mode == "Decrypt" or mode == "D" or mode == "d":
+                elif mode in decrypt:
                     number = number - (ord(key[index]) - ord('a'))
-                elif mode == "end" or mode == "End" or mode == "X" or mode == "x":
+                elif mode in end:
                     pass
                 index = index + 1
                 index = index % len(key)
