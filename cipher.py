@@ -77,3 +77,7 @@ while yeet:
         yeet = False
     else:
         print("please enter either Yes, No, or History to continue")
+
+with open('cipherHistory.txt', 'w') as filehandle:
+    for listitem in history:
+        filehandle.write('%s\n' % listitem)
