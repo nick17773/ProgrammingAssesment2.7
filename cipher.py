@@ -1,4 +1,4 @@
-import json
+import csv
 
 
 # this function declares the selection for the mode of the cipher, either encryption, decryption or end
@@ -83,8 +83,17 @@ while yeet:  # loop that continues the cipher until the user opts out.
     else:  # else statment that runs when the user doesn't input the correct value
         print("please enter either Yes, No, or History to continue")
 
-# open output file for writing
-with open('cipherHistory.txt',
-          'w') as filehandle:  # with statement that outputs the history to a text file, which is overwritten everytime the loop is run
-    for listitem in history:
-        json.dump(history, filehandle)
+txtfile = "cipherHistory.txt"
+csvfile = "cipherHistory.csv"
+
+with open(txtfile,
+          "w") as output:  # with statement that outputs the history to a text file, which is overwritten every time the loop is run (not intentional)
+    writer = csv.writer(output, lineterminator='\n')
+    for val in history:
+        writer.writerow([val])
+
+with open(csvfile,
+          "w") as output:  # with statement that outputs the history to a csv file, which is overwritten every time the loop is run (not intentional)
+    writer = csv.writer(output, lineterminator='\n')
+    for val in history:
+        writer.writerow([val])
