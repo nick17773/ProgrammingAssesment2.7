@@ -88,6 +88,9 @@ while yeet:  # loop that continues the cipher until the user opts out.
 
 txtfile = "cipherHistory.txt"
 csvfile = "cipherHistory.csv"
+'''data_list = [["Encrypted Message", "Key"],
+            [1, history[0], keyHistory[0]],
+            [2, history[1], keyHistory[1]]]'''
 
 with open(txtfile,
           "w") as output:  # with statement that outputs the history to a text file, which is overwritten every time the loop is run (not intentional)
@@ -96,6 +99,7 @@ with open(txtfile,
         writer.writerow([val])
     for val in keyHistory:
         writer.writerow([val])
+    # writer.writerows(data_list)
 
 with open(csvfile,
           "w") as output:  # with statement that outputs the history to a csv file, which is overwritten every time the loop is run (not intentional)
