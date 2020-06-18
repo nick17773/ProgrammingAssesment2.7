@@ -8,7 +8,7 @@ while loop:
             reader = csv.reader(f)
             data = list(reader)
 
-        with open('output.csv', 'w') as result_file:
+        with open('output.csv', 'a+') as result_file:
             wr = csv.writer(result_file, dialect='excel')
             wr.writerows(data)
         print("Values written to output.csv")
@@ -17,7 +17,7 @@ while loop:
             reader = csv.reader(f)
             data = list(reader)
 
-        with open('output.txt', 'w') as result_file:
+        with open('output.txt', 'a+') as result_file:
             wr = csv.writer(result_file, dialect='excel')
             wr.writerows(data)
         print("Values written to output.txt")
