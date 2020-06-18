@@ -21,10 +21,10 @@ def EncryptOrDecrypt():
 
 
 history = []
-
+keyHistory = []
 
 # cipher function
-def cipher(history):
+def cipher(history, keyHistory):
     letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     translated_message = ''
@@ -62,6 +62,7 @@ def cipher(history):
             else:
                 translated_message = translated_message + character
         history.append(translated_message)  # appends the translated message to history to be used later
+        keyHistory.append(key)  # appends the key to history to be used later
         return translated_message
 
 
@@ -71,9 +72,11 @@ yeet = True  # variable that keeps the loop running
 while yeet:  # loop that continues the cipher until the user opts out.
     start = input("Do you want to use the cipher? ")  # input that asks the user if they want to use the cipher
     if start in yes:  # if statement that allows the user to run the cipher
-        print(cipher(history))  # print statement that runs the cipher function
+        print(cipher(history, keyHistory))  # print statement that runs the cipher function
     elif start == "history":  # elif statment that allows the user to view the history of their translated inputs
         for item in history:  # for loop that prints everything in the history list
+            print(item)
+        for item in keyHistory:
             print(item)
     elif start in no:  # elif statment that allows the user to end the loop for the cipher
         print(
@@ -91,9 +94,13 @@ with open(txtfile,
     writer = csv.writer(output, lineterminator='\n')
     for val in history:
         writer.writerow([val])
+    for val in keyHistory:
+        writer.writerow([val])
 
 with open(csvfile,
           "w") as output:  # with statement that outputs the history to a csv file, which is overwritten every time the loop is run (not intentional)
     writer = csv.writer(output, lineterminator='\n')
     for val in history:
+        writer.writerow([val])
+    for val in keyHistory:
         writer.writerow([val])
