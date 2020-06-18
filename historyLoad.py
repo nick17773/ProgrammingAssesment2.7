@@ -11,7 +11,7 @@ while loop:
         with open('output.csv', 'a+') as result_file:
             wr = csv.writer(result_file, dialect='excel')
             wr.writerows(data)
-        print("Values written to output.csv")
+        print("Values appended to output.csv")
     elif type == 'text':
         with open('cipherHistory.txt', newline='') as f:
             reader = csv.reader(f)
@@ -20,7 +20,7 @@ while loop:
         with open('output.txt', 'a+') as result_file:
             wr = csv.writer(result_file, dialect='excel')
             wr.writerows(data)
-        print("Values written to output.txt")
+        print("Values appended to output.txt")
     elif type == "end":
         loop = False
     else:

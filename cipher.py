@@ -92,8 +92,7 @@ csvfile = "cipherHistory.csv"
             [1, history[0], keyHistory[0]],
             [2, history[1], keyHistory[1]]]'''
 
-with open(txtfile,
-          "a+") as output:  # with statement that outputs the history to a text file, which is overwritten every time the loop is run (not intentional)
+with open(txtfile,"a+") as output:  # with statement that outputs the history to a text file
     writer = csv.writer(output, lineterminator='\n', dialect='excel')
     for val in history:
         writer.writerow([val])
@@ -101,8 +100,7 @@ with open(txtfile,
         writer.writerow([val])
     # writer.writerows(data_list)
 
-with open(csvfile,
-          "a+") as output:  # with statement that outputs the history to a csv file, which is overwritten every time the loop is run (not intentional)
+with open(csvfile,"a+") as output:  # with statement that outputs the history to a csv file
     writer = csv.writer(output, lineterminator='\n', dialect='excel')
     for val in history:
         writer.writerow([val])
