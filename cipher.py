@@ -23,6 +23,7 @@ def EncryptOrDecrypt():
 history = []
 keyHistory = []
 
+
 # cipher function
 def cipher(history, keyHistory):
     letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -63,6 +64,8 @@ def cipher(history, keyHistory):
                 translated_message = translated_message + character
         history.append(translated_message)  # appends the translated message to history to be used later
         keyHistory.append(key)  # appends the key to history to be used later
+
+
         return translated_message
 
 
@@ -78,6 +81,7 @@ while yeet:  # loop that continues the cipher until the user opts out.
             print(item)
         for item in keyHistory:
             print(item)
+
     elif start in no:  # elif statment that allows the user to end the loop for the cipher
         print(
             "Thank you for using this tool, Goodbye")  # print statment that that runs a message when the user ends the loop
@@ -91,6 +95,7 @@ csvfile = "cipherHistory.csv"
 '''data_list = [["Encrypted Message", "Key"],
             [1, history[0], keyHistory[0]],
             [2, history[1], keyHistory[1]]]'''
+
 
 with open(txtfile,"a+") as output:  # with statement that outputs the history to a text file
     writer = csv.writer(output, lineterminator='\n', dialect='excel')
@@ -106,3 +111,4 @@ with open(csvfile,"a+") as output:  # with statement that outputs the history to
         writer.writerow([val])
     for val in keyHistory:
         writer.writerow([val])
+
