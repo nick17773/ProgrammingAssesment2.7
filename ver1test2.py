@@ -5,17 +5,13 @@
 # Created by: PyQt5 UI code generator 5.14.2
 #
 # WARNING! All changes made in this file will be lost!
-import sys
+
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Form(object):
-    message = ''
-    key = ''
     def setupUi(self, Form):
-
-
         Form.setObjectName("Form")
         Form.resize(640, 480)
         self.formLayoutWidget = QtWidgets.QWidget(Form)
@@ -26,17 +22,13 @@ class Ui_Form(object):
         self.formLayout.setObjectName("formLayout")
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
-
         self.label = QtWidgets.QLabel(self.formLayoutWidget)
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
-
         self.pushButton_3 = QtWidgets.QPushButton(self.formLayoutWidget)
         self.pushButton_3.setObjectName("pushButton_3")
         self.gridLayout.addWidget(self.pushButton_3, 3, 0, 1, 1)
-
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-
         self.gridLayout.addItem(spacerItem, 1, 1, 1, 1)
         self.pushButton = QtWidgets.QPushButton(self.formLayoutWidget)
         self.pushButton.setObjectName("pushButton")
@@ -49,9 +41,6 @@ class Ui_Form(object):
         self.lineEdit_2 = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.gridLayout.addWidget(self.lineEdit_2, 2, 1, 1, 3)
-        self.lineEdit = QtWidgets.QLineEdit(self.formLayoutWidget)
-        self.lineEdit.setObjectName("lineEdit")
-        self.gridLayout.addWidget(self.lineEdit, 1, 0, 1, 1)
         self.label_4 = QtWidgets.QLabel(self.formLayoutWidget)
         self.label_4.setObjectName("label_4")
         self.gridLayout.addWidget(self.label_4, 2, 0, 1, 1)
@@ -61,11 +50,15 @@ class Ui_Form(object):
         self.label_3 = QtWidgets.QLabel(self.formLayoutWidget)
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 1, 3, 1, 1)
+        self.textEdit = QtWidgets.QTextEdit(self.formLayoutWidget)
+        self.textEdit.setObjectName("textEdit")
+        self.gridLayout.addWidget(self.textEdit, 1, 0, 1, 1)
         self.formLayout.setLayout(0, QtWidgets.QFormLayout.SpanningRole, self.gridLayout)
+        self.textEdit.toPlainText()
 
-        self.pushButton_3.clicked.connect(self.encrypt)
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -77,51 +70,10 @@ class Ui_Form(object):
         self.label_4.setText(_translate("Form", "Key"))
         self.pushButton_2.setText(_translate("Form", "History"))
         self.label_3.setText(_translate("Form", "TextLabel"))
-    def setText(self):
-        text = self.lineEdit.text()
-        self.label_3.setText(text)
-        self.lineEdit.clear()
 
-    def encrypt(self):
-        letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
-        message = self.lineEdit.text()
-        #self.label_3.setText(message)
-        #self.lineEdit.textChanged.connect(self.update_label)
-
-        key = self.lineEdit_2.text()
-        self.label_4.setText(key)
-
-
-        index = 0
-        for character in message:  # encryption/decryption method
-
-            if character in letters:
-                number = letters.find(character)
-
-                number = number + (ord(key[index]) - ord('a'))
-
-                index = index + 1
-                index = index % len(key)
-
-                if number >= len(letters):
-                    number = number - len(letters)
-                elif number < 0:
-                    number = number + len(letters)
-
-                translated_message = translated_message + letters[number]
-
-
-
-            else:
-                translated_message = translated_message + character
-
-        self.label_3.setText(translated_message)
-
-    def update_label(self, translated_message):
-        self.label_3.setText(translated_message)
 
 if __name__ == "__main__":
+    import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
     ui = Ui_Form()
