@@ -82,44 +82,8 @@ class Ui_Form(object):
         self.label_3.setText(text)
         self.lineEdit.clear()
 
-    def encrypt(self):
-        letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
-        message = self.lineEdit.text()
-        #self.label_3.setText(message)
-        #self.lineEdit.textChanged.connect(self.update_label)
-
-        key = self.lineEdit_2.text()
-        self.label_4.setText(key)
 
 
-        index = 0
-        for character in message:  # encryption/decryption method
-
-            if character in letters:
-                number = letters.find(character)
-
-                number = number + (ord(key[index]) - ord('a'))
-
-                index = index + 1
-                index = index % len(key)
-
-                if number >= len(letters):
-                    number = number - len(letters)
-                elif number < 0:
-                    number = number + len(letters)
-
-                translated_message = translated_message + letters[number]
-
-
-
-            else:
-                translated_message = translated_message + character
-
-        self.label_3.setText(translated_message)
-
-    def update_label(self, translated_message):
-        self.label_3.setText(translated_message)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
