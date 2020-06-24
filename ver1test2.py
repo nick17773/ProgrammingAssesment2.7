@@ -54,7 +54,8 @@ class Ui_Form(object):
         self.plainTextEdit_3.setObjectName("plainTextEdit_3")
         self.gridLayout.addWidget(self.plainTextEdit_3, 1, 2, 1, 1)
         self.formLayout.setLayout(0, QtWidgets.QFormLayout.SpanningRole, self.gridLayout)
-        self.pushButton_3.clicked.connect(self.output)
+        self.pushButton.clicked.connect(self.decrypt)
+        self.pushButton_3.clicked.connect(self.encrypt)
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -67,24 +68,64 @@ class Ui_Form(object):
         self.label_2.setText(_translate("Form", "Output"))
         self.label_4.setText(_translate("Form", "Key"))
         self.pushButton_3.setText(_translate("Form", "Encrypt"))
+
     def encrypt(self):
         letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
         message = self.plainTextEdit.toPlainText()
-        #self.label_3.setText(message)
-        #self.lineEdit.textChanged.connect(self.update_label)
+
+        # self.label_3.setText(message)
+        # self.lineEdit.textChanged.connect(self.update_label)
 
         key = self.plainTextEdit_2.toPlainText()
 
-
-
+        translated_message = ''
+        encrypt = "E"
+        mode = "E"
         index = 0
         for character in message:  # encryption/decryption method
 
             if character in letters:
                 number = letters.find(character)
 
-                number = number + (ord(key[index]) - ord('a'))
+                if mode in encrypt:
+                    number = number + (ord(key[index]) - ord('a'))
+
+                index = index + 1
+                index = index % len(key)
+
+                if number >= len(letters):
+                    number = number - len(letters)
+                elif number < 0:
+                    number = number + len(letters)
+
+                translated_message = translated_message + letters[number]
+            else:
+                translated_message = translated_message + character
+            self.plainTextEdit_3.setPlainText(translated_message)
+
+        return translated_message
+
+    def decrypt(self):
+        letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+        message = self.plainTextEdit.toPlainText()
+
+        # self.label_3.setText(message)
+        # self.lineEdit.textChanged.connect(self.update_label)
+
+        key = self.plainTextEdit_2.toPlainText()
+
+        translated_message = ''
+        decrypt = "D"
+        mode = "D"
+        index = 0
+        for character in message:  # encryption/decryption method
+            if character in letters:
+                number = letters.find(character)
+
+                if mode in decrypt:
+                    number = number - (ord(key[index]) - ord('a'))
 
                 index = index + 1
                 index = index % len(key)
@@ -100,13 +141,16 @@ class Ui_Form(object):
 
             else:
                 translated_message = translated_message + character
+
+            self.plainTextEdit_3.setPlainText(translated_message)
         return translated_message
-    def output(self):
-        self.plainTextEdit_3.setPlainText(self.encrypt)
+
+
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
     ui = Ui_Form()
