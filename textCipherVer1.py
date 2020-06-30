@@ -2,7 +2,8 @@ import csv
 
 
 # this function declares the selection for the mode of the cipher, either encryption, decryption or end
-def EncryptOrDecrypt():
+def encryptOrDecrypt():
+    global mode
     count = 0
     encrypt = ["Encrypt", "encrypt", "E", "e"]  # list of possible inputs that will be taken to use as encrypt
     decrypt = ["Decrypt", "decrypt", "D", "d"]  # list of possible inputs that will be taken to use as decrypt
@@ -21,11 +22,11 @@ def EncryptOrDecrypt():
 
 
 history = []
-keyHistory = []
+key_history = []
 
 
 # cipher function
-def cipher(history, keyHistory):
+def cipher(history, key_history):
     letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     translated_message = ''
@@ -38,7 +39,7 @@ def cipher(history, keyHistory):
         message = input("Enter message text: ")
 
         key = input("Set shift offset ")
-        mode = EncryptOrDecrypt()
+        mode = encryptOrDecrypt()
         for character in message:  # encryption/decryption method
             if character in letters:
                 number = letters.find(character)
@@ -57,58 +58,48 @@ def cipher(history, keyHistory):
                     number = number + len(letters)
 
                 translated_message = translated_message + letters[number]
-
-
-
             else:
                 translated_message = translated_message + character
         history.append(translated_message)  # appends the translated message to history to be used later
-        keyHistory.append(key)  # appends the key to history to be used later
-
-
+        key_history.append(key)  # appends the key to history to be used later
         return translated_message
 
 
 yes = ["Yes", "yes", "y", "Y"]  # list for possible clauses to be used to continue the loop relating to yes
 no = ["No", "no", "n", "N"]  # list for possible clauses to be used to end the loop relating to no
-yeet = True  # variable that keeps the loop running
-while yeet:  # loop that continues the cipher until the user opts out.
+go = True  # variable that keeps the loop running
+while go:  # loop that continues the cipher until the user opts out.
     start = input("Do you want to use the cipher? ")  # input that asks the user if they want to use the cipher
     if start in yes:  # if statement that allows the user to run the cipher
-        print(cipher(history, keyHistory))  # print statement that runs the cipher function
-    elif start == "history":  # elif statment that allows the user to view the history of their translated inputs
+        print(cipher(history, key_history))  # print statement that runs the cipher function
+    elif start == "history":  # elif statement that allows the user to view the history of their translated inputs
         for item in history:  # for loop that prints everything in the history list
             print(item)
-        for item in keyHistory:
+        for item in key_history:
             print(item)
 
-    elif start in no:  # elif statment that allows the user to end the loop for the cipher
+    elif start in no:  # elif statement that allows the user to end the loop for the cipher
         print(
-            "Thank you for using this tool, Goodbye")  # print statment that that runs a message when the user ends the loop
+            "Thank you for using this tool, Goodbye")  # print statement that that runs a message when the user ends the loop
 
-        yeet = False
-    else:  # else statment that runs when the user doesn't input the correct value
+        go = False
+    else:  # else statement that runs when the user doesn't input the correct value
         print("please enter either Yes, No, or History to continue")
 
 txtfile = "cipherHistory.txt"
 csvfile = "cipherHistory.csv"
-'''data_list = [["Encrypted Message", "Key"],
-            [1, history[0], keyHistory[0]],
-            [2, history[1], keyHistory[1]]]'''
 
-
-with open(txtfile,"a+") as output:  # with statement that outputs the history to a text file
+with open(txtfile, "a+") as output:  # with statement that outputs the history to a text file
     writer = csv.writer(output, lineterminator='\n', dialect='excel')
     for val in history:
         writer.writerow([val])
-    for val in keyHistory:
+    for val in key_history:
         writer.writerow([val])
-    # writer.writerows(data_list)
 
-with open(csvfile,"a+") as output:  # with statement that outputs the history to a csv file
+with open(csvfile, "a+") as output:  # with statement that outputs the history to a csv file
     writer = csv.writer(output, lineterminator='\n', dialect='excel')
     for val in history:
         writer.writerow([val])
-    for val in keyHistory:
+    for val in key_history:
         writer.writerow([val])
 
