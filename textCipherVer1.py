@@ -21,33 +21,32 @@ def encryptOrDecrypt():
     return mode
 
 
-history = []
+message_history = []
 key_history = []
 
 
 # cipher function
-def cipher(history, key_history):
+def cipher(message_history, key_history):
     letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
     translated_message = ''
     encrypt = ["Encrypt", "encrypt", "E", "e"]  # same as above list for encrypt
     decrypt = ["Decrypt", "decrypt", "D", "d"]  # same as above list for decrypt
     end = ["End", "end", "X", "x"]  # same as above list for end
     index = 0
-    yeet = True
-    while yeet:  # while loop that keeps the cipher running until the user chooses to end.
+    loop = True
+    while loop:  # while loop that keeps the cipher running until the user chooses to end.
         message = input("Enter message text: ")
 
         key = input("Set shift offset ")
-        mode = encryptOrDecrypt()
+        mode1 = encryptOrDecrypt()
         for character in message:  # encryption/decryption method
             if character in letters:
                 number = letters.find(character)
-                if mode in encrypt:
+                if mode1 in encrypt:
                     number = number + (ord(key[index]) - ord('a'))
-                elif mode in decrypt:
+                elif mode1 in decrypt:
                     number = number - (ord(key[index]) - ord('a'))
-                elif mode in end:
+                elif mode1 in end:
                     pass
                 index = index + 1
                 index = index % len(key)
@@ -60,7 +59,7 @@ def cipher(history, key_history):
                 translated_message = translated_message + letters[number]
             else:
                 translated_message = translated_message + character
-        history.append(translated_message)  # appends the translated message to history to be used later
+        message_history.append(translated_message)  # appends the translated message to history to be used later
         key_history.append(key)  # appends the key to history to be used later
         return translated_message
 
@@ -71,9 +70,9 @@ go = True  # variable that keeps the loop running
 while go:  # loop that continues the cipher until the user opts out.
     start = input("Do you want to use the cipher? ")  # input that asks the user if they want to use the cipher
     if start in yes:  # if statement that allows the user to run the cipher
-        print(cipher(history, key_history))  # print statement that runs the cipher function
+        print(cipher(message_history, key_history))  # print statement that runs the cipher function
     elif start == "history":  # elif statement that allows the user to view the history of their translated inputs
-        for item in history:  # for loop that prints everything in the history list
+        for item in message_history:  # for loop that prints everything in the history list
             print(item)
         for item in key_history:
             print(item)
@@ -91,14 +90,14 @@ csvfile = "cipherHistory.csv"
 
 with open(txtfile, "a+") as output:  # with statement that outputs the history to a text file
     writer = csv.writer(output, lineterminator='\n', dialect='excel')
-    for val in history:
+    for val in message_history:
         writer.writerow([val])
     for val in key_history:
         writer.writerow([val])
 
 with open(csvfile, "a+") as output:  # with statement that outputs the history to a csv file
     writer = csv.writer(output, lineterminator='\n', dialect='excel')
-    for val in history:
+    for val in message_history:
         writer.writerow([val])
     for val in key_history:
         writer.writerow([val])
