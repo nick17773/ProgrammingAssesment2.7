@@ -101,4 +101,3 @@ with open(csvfile, "a+") as output:  # with statement that outputs the history t
         writer.writerow([val])
     for val in key_history:
         writer.writerow([val])
-
