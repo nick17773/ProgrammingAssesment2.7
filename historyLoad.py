@@ -2,8 +2,8 @@ import csv
 
 loop = True
 while loop:
-    type = input("What file type would you like to load? ")
-    if type == 'csv':
+    fileType = input("What file type would you like to load? ")
+    if fileType == 'csv':
         with open('cipherHistory.csv', newline='') as f:
             reader = csv.reader(f)
             data = list(reader)
@@ -12,7 +12,7 @@ while loop:
             wr = csv.writer(result_file, dialect='excel')
             wr.writerows(data)
         print("Values appended to output.csv")
-    elif type == 'text':
+    elif fileType == 'text':
         with open('cipherHistory.txt', newline='') as f:
             reader = csv.reader(f)
             data = list(reader)
@@ -21,7 +21,7 @@ while loop:
             wr = csv.writer(result_file, dialect='excel')
             wr.writerows(data)
         print("Values appended to output.txt")
-    elif type == "end":
+    elif fileType == "end":
         loop = False
     else:
         print("Please enter either text, csv or end to continue")
