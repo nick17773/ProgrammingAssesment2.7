@@ -64,10 +64,14 @@ def cipher(message_history, key_history):
         return translated_message
 
 
+startMsg = "Hi, welcome to my cipher tool, Please input yes to continue, and input a message and a keyword as a key, then select either encrypt or decrypt to run the program. " \
+           "\nOtherwise please input no. Information inputted will be stored in both a csv and txt file when the program ends."
 yes = ["Yes", "yes", "y", "Y"]  # list for possible clauses to be used to continue the loop relating to yes
 no = ["No", "no", "n", "N"]  # list for possible clauses to be used to end the loop relating to no
 go = True  # variable that keeps the loop running
+print(startMsg)
 while go:  # loop that continues the cipher until the user opts out.
+
     start = input("Do you want to use the cipher? ")  # input that asks the user if they want to use the cipher
     if start in yes:  # if statement that allows the user to run the cipher
         print(cipher(message_history, key_history))  # print statement that runs the cipher function
