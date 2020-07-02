@@ -37,7 +37,7 @@ def cipher(message_history, key_history):
     while loop:  # while loop that keeps the cipher running until the user chooses to end.
         message = input("Enter message text: ")
 
-        key = input("Set shift offset ")
+        key = input("Set shift offset: ")
         mode1 = encryptOrDecrypt()
         for character in message:  # encryption/decryption method
             if character in letters:
@@ -78,12 +78,11 @@ while go:  # loop that continues the cipher until the user opts out.
             print(item)
 
     elif start in no:  # elif statement that allows the user to end the loop for the cipher
-        print(
-            "Thank you for using this tool, Goodbye")  # print statement that that runs a message when the user ends the loop
+        print("Thank you for using this tool, Goodbye")  # print statement that that runs a message when the user ends the loop
 
         go = False
     else:  # else statement that runs when the user doesn't input the correct value
-        print("please enter either Yes, No, or History to continue")
+        print("Please enter either Yes, No, or History to continue")
 
 txtfile = "cipherHistory.txt"
 csvfile = "cipherHistory.csv"
