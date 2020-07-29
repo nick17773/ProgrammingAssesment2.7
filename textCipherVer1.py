@@ -37,7 +37,7 @@ def cipher(message_history, key_history):
     while loop:  # while loop that keeps the cipher running until the user chooses to end.
         message = input("Enter message text: ")
 
-        key = input("Set shift offset: ")
+        key = input("Set shift offset (number, word or letter): ")
         mode1 = encryptOrDecrypt()
         for character in message:  # encryption/decryption method
             if character in letters:
