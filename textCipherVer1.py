@@ -3,22 +3,21 @@ import csv
 
 # this function declares the selection for the mode of the cipher, either encryption, decryption or end
 def encryptOrDecrypt():
-    global mode
-    count = 0
+
+    loop_count = 0
     encrypt = ["Encrypt", "encrypt", "E", "e"]  # list of possible inputs that will be taken to use as encrypt
     decrypt = ["Decrypt", "decrypt", "D", "d"]  # list of possible inputs that will be taken to use as decrypt
     end = ["End", "end", "X", "x"]  # list of possible inputs that will be taken to end the program
-    while count == 0:
+    while loop_count == 0:
         mode = str(input("Encrypt or Decrypt? "))  # input that asks the user whether they will encrypt or decrypt
         if mode in encrypt:
-            count = count + 1
+            loop_count = loop_count + 1
         elif mode in decrypt:
-            count = count + 1
+            loop_count = loop_count + 1
         elif mode in end:
             break
         else:
             print("You need to enter in a valid answer. Please try again. ")
-    return mode
 
 
 message_history = []
