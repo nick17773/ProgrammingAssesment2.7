@@ -35,6 +35,8 @@ key_history = []
 def cipher(message_history, key_history, ):
     letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     translated_message = ''
+    message = ""
+    key = ""
     encrypt = ["Encrypt", "encrypt", "E", "e"]  # same as above list for encrypt
     decrypt = ["Decrypt", "decrypt", "D", "d"]  # same as above list for decrypt
     end = ["End", "end", "X", "x"]  # same as above list for end
@@ -43,10 +45,22 @@ def cipher(message_history, key_history, ):
     while loop:  # while loop that keeps the cipher running until the user chooses to end.
         step1 = "Great! You chose to use this cipher tool. To continue, please enter a message you would like to use"
         print(step1)
-        message = input("Enter message text: ")
+        lengthCheck = False
+        while not lengthCheck:
+            message = input("Enter message text: ")
+            if len(message) <= 280:
+                lengthCheck = True
+            else:
+                print("please enter a message less than 280 characters long")
         step2 = "Awesome, you've selected a message. To continue, please input a key (number, letter or word) you would like to use to change the message"
         print(step2)
-        key = input("Enter key (number, word or letter): ")
+        keyLengthCheck = False
+        while not keyLengthCheck:
+            key = input("Enter key (number, word or letter): ")
+            if len(key) <= 50:
+                keyLengthCheck = True
+            else:
+                print("please enter a key less than 50 characters long")
         mode1 = encryptOrDecrypt(cipher_mode)
         for character in message:  # encryption/decryption method
             if character in letters:
@@ -97,7 +111,7 @@ while go:  # loop that continues the cipher until the user opts out.
     elif start in no:  # elif statement that allows the user to end the loop for the cipher
         print(
             "Thank you for using this tool, Goodbye")  # print statement that that runs a message when the user ends the loop
-
+        print("Keys & Translated messages exported")
         go = False
     else:  # else statement that runs when the user doesn't input the correct value
         print("Please enter either Yes, No, or History to continue")
