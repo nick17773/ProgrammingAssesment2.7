@@ -118,8 +118,8 @@ class UiForm(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.pushButton_2.setText(_translate("Form", "History"))
-        self.pushButton_4.setText(_translate("Form", "Key History"))
+        self.pushButton_2.setText(_translate("Form", "Last Translated Message"))
+        self.pushButton_4.setText(_translate("Form", "Last Key"))
         self.label.setText(_translate("Form", "Input"))
         self.pushButton.setText(_translate("Form", "Decrypt"))
         self.label_2.setText(_translate("Form", "Output"))
@@ -130,6 +130,7 @@ class UiForm(object):
 
     def encrypt(self):
         letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
         message = self.plainTextEdit.toPlainText()
         key = self.plainTextEdit_2.toPlainText()
         global history
